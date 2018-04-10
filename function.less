@@ -1,0 +1,289 @@
+/*----------------------------------------------------------------
+	// 文件名：functions.less
+	// 文件功能描述：基本函数定义
+//----------------------------------------------------------------*/
+
+
+// 全局变量
+
+@font-size: 14px;
+
+@color-light: #d2dee2;
+@color-primary: #3286ff;
+@color-deep: #3ea4cc;
+@color-dark: #317c9a;
+
+@color-lightgray: #dbe1ff;//14410239
+@color-gray: #b5b4c2;//11908290
+@color-deepgray: #2c2e43;//2895427
+@color-darkgray: #232639;//2303545
+@color-black: #393b48;//3750728
+@color-purplegray: #7d7a8f;
+
+// @color-green: #a6ce9c;
+@color-green: #8ec780;
+
+@color-pass: #6aa71b;
+@color-failed: #d63b3f;
+
+@color-orange: #ff8d22;
+
+@table-inner: 980px;
+@table-outer: 980px;
+
+@dialog-title-bg: @color-purplegray;
+@btn-primary-bg: @color-green;
+
+// 清除浮动
+.fn-clear {
+	zoom:1;
+	&:after {
+		visibility: hidden;
+		display: block;
+		font-size: 0;
+		content: " ";
+		clear: both;
+		height: 0;
+	}
+}
+/* fn-text-overflow 文本超出省略*/
+.fn-text-overflow {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+// box-sizing 兼容
+.border-box {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.content-box {
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	-o-box-sizing: content-box;
+	-ms-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+.text-center(@line-height, @color, @font-size: 12px) {
+	text-align: center;
+	line-height: @line-height;
+	color: @color;
+	font-size: @font-size;
+}
+
+.liststyle-ol {
+	counter-reset: sectioncounter;
+	& li:before {
+		content: counter(sectioncounter)"  ";
+		counter-increment: sectioncounter;
+	}
+}
+
+// Reset filters for IE
+.reset-filter() {
+filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+// Gradient Bar Colors for buttons and alerts
+// .gradientBar(@primaryColor, @secondaryColor) {
+// #gradient > .vertical(@primaryColor, @secondaryColor);
+// border-color: @secondaryColor @secondaryColor darken(@secondaryColor, 15%);
+// border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) fadein(rgba(0,0,0,.1), 15%);
+// }
+
+// Gradients
+.gradient-vertical(@startColor: #555, @endColor: #333) {
+	background-color: mix(@startColor, @endColor, 60%);
+	background-image: -moz-linear-gradient(top, @startColor, @endColor); // FF 3.6+
+	background-image: -ms-linear-gradient(top, @startColor, @endColor); // IE10
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+	background-image: -webkit-linear-gradient(top, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+	background-image: -o-linear-gradient(top, @startColor, @endColor); // Opera 11.10
+	background-image: linear-gradient(top, @startColor, @endColor); // The standard
+	background-repeat: repeat-x;
+	// filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@startColor,@endColor)); // IE9 and down
+}
+.gradient-cross(@startColor: #555, @endColor: #333) {
+	background-color: mix(@startColor, @endColor, 60%);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor); // FF 3.6+
+	background-image: -ms-linear-gradient(left, @startColor, @endColor); // IE10
+	background-image: -webkit-gradient(linear, 0 0, 100% 0, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+	background-image: -o-linear-gradient(left, @startColor, @endColor); // Opera 11.10
+	background-image: linear-gradient(left, @startColor, @endColor); // The standard
+	background-repeat: repeat-y;
+	// filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",@startColor,@endColor)); // IE9 and down
+}
+.gradient-radial(@startColor: #555, @endColor: #333, @x: center, @y: center) {
+	background:-moz-radial-gradient(@x @y,circle,@startColor,@endColor);
+	background:-ms-radial-gradient(@x @y,circle,@startColor,@endColor);
+	background:-webkit-radial-gradient(@x @y,circle,@startColor,@endColor);
+	background:-o-radial-gradient(@x @y,circle,@startColor,@endColor);
+	background:radial-gradient(@x @y,circle,@startColor,@endColor);
+}
+
+// transform
+//type: 矩阵变换 matrix(6 params, 4 none | 2 px) | 位移 translate(2 params, px) | 旋转 rotate(deg) | 缩放 scale(2 params) | 扭曲 skew(2 params, deg);
+.transform-matrix(@param1, @param2, @param3, @param4, @param5, @param6) {
+	-moz-transform:matrix(@param1, @param2, @param3, @param4, @param5, @param6);
+	-webkit-transform:matrix(@param1, @param2, @param3, @param4, unit(@param5), unit(@param6));
+	-o-transform:matrix(@param1, @param2, @param3, @param4, unit(@param5), unit(@param6));
+	-ms-transform:matrix(@param1, @param2, @param3, @param4, unit(@param5), unit(@param6));
+	transform:matrix(@param1, @param2, @param3, @param4, unit(@param5), unit(@param6));
+}
+.transform-translate(@param1, @param2) {
+	-moz-transform:translate(@param1, @param2);
+	-webkit-transform:translate(@param1, @param2);
+	-o-transform:translate(@param1, @param2);
+	-ms-transform:translate(@param1, @param2);
+	transform:translate(@param1, @param2);
+}
+.transform-rotate(@param) {
+	-moz-transform:rotate(@param);
+	-webkit-transform:rotate(@param);
+	-o-transform:rotate(@param);
+	-ms-transform:rotate(@param);
+	transform:rotate(@param);
+}
+.transform-scale(@param) {
+	-moz-transform:scale(@param);
+	-webkit-transform:scale(@param);
+	-o-transform:scale(@param);
+	-ms-transform:scale(@param);
+	transform:scale(@param);
+}
+.transform-skew(@param1, @param2) {
+	-moz-transform:skew(@param1, @param2);
+	-webkit-transform:skew(@param1, @param2);
+	-o-transform:skew(@param1, @param2);
+	-ms-transform:skew(@param1, @param2);
+	transform:skew(@param1, @param2);
+}
+
+.box-shadow(@params) {
+	-webkit-box-shadow: @params;
+	box-shadow: @params;
+}
+
+// transition(property duration function delay)
+.transition(@params) {
+	-moz-transition: @params;
+	-webkit-transition: @params;
+	-o-transition: @params;
+	-ms-transition: @params;
+	transition: @params;
+}
+
+.arrow(@width,@color,@begin,@end) {
+	border: @width dashed transparent;
+	border-@{begin}: @width solid @color;
+	border-@{end}-width: 0;
+}
+
+.blur(@pixel) {
+	-webkit-filter: blur(@pixel); /* Chrome, Opera */
+	-moz-filter: blur(@pixel);
+	-ms-filter: blur(@pixel);
+	filter: blur(@pixel);
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=unit(@pixel), MakeShadow=false); /* IE6~IE9 */
+}
+.gray {
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+	filter: grayscale(100%);
+	filter: gray;
+}
+.colorful {
+	-webkit-filter: grayscale(0%);
+	-moz-filter: grayscale(0%);
+	-ms-filter: grayscale(0%);
+	-o-filter: grayscale(0%);
+	filter: grayscale(0%);
+}
+
+
+.dialog-static2-layout(@width, @label: 90px) {
+	width: @width;
+	.form-label,
+	.form-label-same {
+		width: @label;
+	}
+	.form-text {
+		max-width: (@width - 30px)*0.5 - @label - 16px - 6px;
+	}
+	.long,
+	.fulfill {
+		input[type="text"] {
+			width: (@width - 30px)*0.5 + 158px;
+		}
+		.form-text {
+			max-width: (@width - 30px)*0.5 + 158px - 16px;
+		}
+	}
+}
+
+.table-size(@width: 100%, @height: 300px) {
+	.form-table-wrap {
+		width: @width;
+	}
+	.form-table-body {
+		height: @height;
+	}
+}
+
+.tree-select-height(@height: 350px, @height-1: 70px, @height-2: 248px) {
+	.tree-select {
+		height: @height;
+	}
+	.tree-select-contain,
+	.tree-select-list,
+	.tree-select-filter {
+		height: @height - 36px;
+	}
+	.tree-select-list.list-1 {
+		height: @height-1;
+	}
+	.tree-select-list.list-2 {
+		height: @height-2;
+	}
+}
+
+.tree-index-size(@width: 210px, @padding: 15px) {
+	.tree-search {
+		padding: @padding;
+		width: @width - 2*@padding;
+	}
+	.tree-search-btn {
+		top: @padding;
+	}
+	.tree-contain {
+		width: @width - 2*@padding + 10px;
+		top: 2*@padding + 24px;
+		padding: 0 @padding - 5px;
+	}
+}
+.tree-dropdown-size(@width:175px, @height: 100px, @padding: 10px) {
+	.tree-search {
+		padding: @padding;
+		width: @width - 2*@padding;
+	}
+	.tree-search-btn {
+		top: @padding;
+	}
+	.tree-contain {
+		width: @width - 2*@padding + 10px;
+		top: 2*@padding + 24px;
+		padding: 0 @padding - 5px;
+	}
+	.form-dropdown-list {
+		height: @height;
+	}
+}
+
